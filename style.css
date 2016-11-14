@@ -1,0 +1,94 @@
+blockquote {
+  padding-left: 20px;
+  margin-left: 0;
+  margin-right: 0;
+  background: #ddd;
+  border-left: 5px solid #ccc;
+  border-radius: 0 3px 3px 0;
+}
+
+blockquote p {
+  padding: .5em;
+  color: #272822;
+}
+
+p {
+  display: block;
+  -webkit-margin-before: 0.9em;
+  -webkit-margin-after: 0.9em;
+  -webkit-margin-start: 0px;
+  -webkit-margin-end: 0px;
+}
+
+pre {
+  font-size: 90%;
+  line-height: 1.2;
+}
+
+ul {
+  padding: 0 0 0 40px;
+  font-weight: 200;
+  line-height: 1.6;
+}
+
+.progress {
+  z-index: 1000;
+}
+
+.progress-bar {
+  height: 5px;
+}
+
+img {
+  width: 100%
+}
+
+body,
+.slide {
+  background-color: #eee;
+}
+
+.slide-content {
+  margin-top: 20px;
+  width: auto;
+  max-width: 1000px;
+  height: auto;
+  overflow: auto;
+  z-index: 1;
+}
+
+.controls {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+}
+
+.arrow {
+  width: 0;
+  height: 0;
+  border: 30px solid #ddd;
+  float: left;
+  margin-right: 30px;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.prev {
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+  border-left-width: 0;
+  border-right-width: 50px;
+}
+
+.next {
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+  border-right-color: transparent;
+  border-left-width: 50px;
+  border-right-width: 0;
+}

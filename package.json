@@ -1,0 +1,25 @@
+{
+  "name": "javascript-obstacles",
+  "version": "1.0.0",
+  "description": "javascript-obstacles",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node_modules/.bin/cleaver README.md",
+    "watch": "node_modules/.bin/cleaver watch *.*",
+    "show": "live-server & node_modules/.bin/cleaver watch *.*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/intesso/javascript-obstacles.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/intesso/javascript-obstacles/issues"
+  },
+  "homepage": "https://github.com/intesso/javascript-obstacles#readme",
+  "devDependencies": {
+    "cleaver": "^0.8.2",
+    "live-server": "^1.1.0"
+  }
+}
