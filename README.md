@@ -9,6 +9,15 @@ style: style.css
 output: index.html
 
 --
+# javascript-obstacles
+
+
+> http://intesso.github.io/javascript-obstacles
+
+*navigate with left, right keys*
+
+
+--
 ### js obstacles
 
 > Callback Functions
@@ -370,6 +379,7 @@ repeater('everyone', 'yay!')();  //everyone said yay!
 
 - ES5 :: **node.js** <= 0.x :: [**browser** caniuse +](http://caniuse.com/#search=es5)
 - ES6 (ECMAScript 2015) :: **io.js, node.js** > 0.x :: [**browser** caniuse ~](http://caniuse.com/#search=es6)
+
 
 --
 ### js obstacles
