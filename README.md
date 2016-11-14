@@ -371,16 +371,6 @@ repeater('everyone', 'yay!')();  //everyone said yay!
 - ES5 :: **node.js** <= 0.x :: [**browser** caniuse +](http://caniuse.com/#search=es5)
 - ES6 (ECMAScript 2015) :: **io.js, node.js** > 0.x :: [**browser** caniuse ~](http://caniuse.com/#search=es6)
 
-**node.js releases**
-- LTS: long term support (even numbers)
-  - current release (Nov 2016): V6 "Boron"
-  - actively maintained for 18 month, maintenance mode afterwards
-  - no more than two LTS versions at the same time
-- Stable: shorter lifespan, more updates (odd numbers)
-  - current release (Nov 2016): V7
-  - when Stable release becomes the next LTS, no new features or breaking changes are added
-
-
 --
 ### js obstacles
 
