@@ -856,7 +856,8 @@ l();
 <span class="hljs-keyword">let</span> mylet = <span class="hljs-string">'hello let'</span>;
 <span class="hljs-keyword">const</span> myconst = <span class="hljs-string">'HELLO_CONST'</span>;
 <span class="hljs-keyword">if</span> (mylet &amp;&amp; myconst) {
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'mylet:'</span>, mylet, <span class="hljs-string">'myconst:'</span>, myconst); <span class="hljs-comment">// -&gt; mylet: hello let myconst: HELLO_CONST</span>
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'mylet:'</span>, mylet, <span class="hljs-string">'myconst:'</span>, myconst); 
+  <span class="hljs-comment">// -&gt; mylet: hello let myconst: HELLO_CONST</span>
 }
 myfunction();</code></pre>
 </section>
@@ -873,11 +874,11 @@ myfunction();</code></pre>
   <span class="hljs-keyword">if</span> (!i) {
     <span class="hljs-keyword">const</span> myconst = i;
   }
-  <span class="hljs-built_in">console</span>.log(myconst); <span class="hljs-comment">// ReferenceError: myconst is not defined in this block scope</span>
+  <span class="hljs-built_in">console</span>.log(myconst); <span class="hljs-comment">// ReferenceError: myconst is not defined</span>
 }
 <span class="hljs-built_in">console</span>.log(myvar); <span class="hljs-comment">// -&gt; 2</span>
-<span class="hljs-built_in">console</span>.log(mylet); <span class="hljs-comment">// ReferenceError: mylet is not defined in this scope</span>
-<span class="hljs-built_in">console</span>.log(myconst); <span class="hljs-comment">// ReferenceError: myconst is not defined in this scope</span></code></pre>
+<span class="hljs-built_in">console</span>.log(mylet); <span class="hljs-comment">// ReferenceError: mylet is not defined</span>
+<span class="hljs-built_in">console</span>.log(myconst); <span class="hljs-comment">// ReferenceError: myconst is not defined</span></code></pre>
 </section>
   </div>
   <div class="slide hidden" id="slide-23">
@@ -904,12 +905,14 @@ myfunction();</code></pre>
 <p>Arrow Function and <code>this</code> </p>
 </blockquote>
 <p><em>an arrow function does not create its own <code>this</code> context</em></p>
-<p>*in most cases, this is helpful and we can get rid of <code>var self = this</code></p>
+<p><em>in most cases, this is helpful and we can get rid of <code>var self = this</code></em></p>
 <p><em>however arrow functions cannot be used with apis that create their own <code>this</code> context.</em></p>
 <pre><code class="lang-js"><span class="hljs-built_in">document</span>.body.addEventListener(<span class="hljs-string">'click'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
   <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span> <span class="hljs-keyword">instanceof</span> HTMLBodyElement); <span class="hljs-comment">// true</span>
 });</code></pre>
-<pre><code class="lang-js"><span class="hljs-built_in">document</span>.body.addEventListener(<span class="hljs-string">'click'</span>, (e) =&gt; <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span> <span class="hljs-keyword">instanceof</span> HTMLBodyElement)); <span class="hljs-comment">// false -&gt; window object</span></code></pre>
+<pre><code class="lang-js"><span class="hljs-built_in">document</span>.body.addEventListener(<span class="hljs-string">'click'</span>, (e) =&gt; {
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span> <span class="hljs-keyword">instanceof</span> HTMLBodyElement); <span class="hljs-comment">// false -&gt; window object</span>
+});</code></pre>
 </section>
   </div>
   <div class="slide hidden" id="slide-25">
@@ -962,7 +965,8 @@ Greeter(<span class="hljs-string">'Tom'</span>).greet(<span class="hljs-string">
   }
 }
 <span class="hljs-keyword">new</span> Greeter(<span class="hljs-string">'Tom'</span>).greet(<span class="hljs-string">'Jerry'</span>); <span class="hljs-comment">// -&gt; Tom greets Jerry</span>
-Greeter(<span class="hljs-string">'Tom'</span>).greet(<span class="hljs-string">'Jerry'</span>); <span class="hljs-comment">// TypeError: Class constructor Greeter cannot be invoked without 'new'</span></code></pre>
+Greeter(<span class="hljs-string">'Tom'</span>).greet(<span class="hljs-string">'Jerry'</span>); <span class="hljs-comment">// TypeError: </span>
+<span class="hljs-comment">// Class constructor Greeter cannot be invoked without 'new'</span></code></pre>
 </section>
   </div>
   <div class="slide hidden author-slide" id="slide-28">

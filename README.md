@@ -433,7 +433,8 @@ var myvar = 'hello var'
 let mylet = 'hello let';
 const myconst = 'HELLO_CONST';
 if (mylet && myconst) {
-  console.log('mylet:', mylet, 'myconst:', myconst); // -> mylet: hello let myconst: HELLO_CONST
+  console.log('mylet:', mylet, 'myconst:', myconst); 
+  // -> mylet: hello let myconst: HELLO_CONST
 }
 myfunction();
 ```
@@ -452,11 +453,11 @@ for (let i = 0; i < 3; i++) {
   if (!i) {
     const myconst = i;
   }
-  console.log(myconst); // ReferenceError: myconst is not defined in this block scope
+  console.log(myconst); // ReferenceError: myconst is not defined
 }
 console.log(myvar); // -> 2
-console.log(mylet); // ReferenceError: mylet is not defined in this scope
-console.log(myconst); // ReferenceError: myconst is not defined in this scope
+console.log(mylet); // ReferenceError: mylet is not defined
+console.log(myconst); // ReferenceError: myconst is not defined
 ```
 
 --
@@ -487,7 +488,7 @@ for(let i = 0; i < 10; i++) {
 
 *an arrow function does not create its own `this` context*
 
-*in most cases, this is helpful and we can get rid of `var self = this`
+*in most cases, this is helpful and we can get rid of `var self = this`*
 
 *however arrow functions cannot be used with apis that create their own `this` context.*
 
@@ -498,7 +499,9 @@ document.body.addEventListener('click', function() {
 ```
 
 ```js
-document.body.addEventListener('click', (e) => console.log(this instanceof HTMLBodyElement)); // false -> window object
+document.body.addEventListener('click', (e) => {
+  console.log(this instanceof HTMLBodyElement); // false -> window object
+});
 ```
 
 --
@@ -559,5 +562,6 @@ class Greeter {
   }
 }
 new Greeter('Tom').greet('Jerry'); // -> Tom greets Jerry
-Greeter('Tom').greet('Jerry'); // TypeError: Class constructor Greeter cannot be invoked without 'new'
+Greeter('Tom').greet('Jerry'); // TypeError: 
+// Class constructor Greeter cannot be invoked without 'new'
 ```
