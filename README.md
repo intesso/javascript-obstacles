@@ -14,6 +14,8 @@ output: index.html
 
 > http://intesso.github.io/javascript-obstacles
 
+feedback and pull requests welcome on [GitHub ](https://github.com/intesso/javascript-obstacles)[![github](img/github.png)](https://github.com/intesso/javascript-obstacles)
+
 *navigate with left, right keys*
 
 --

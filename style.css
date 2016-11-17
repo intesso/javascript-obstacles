@@ -43,6 +43,10 @@ img {
   width: 100%
 }
 
+#slide-1 img {
+  width: auto;
+}
+
 body,
 .slide {
   background-color: #eee;
