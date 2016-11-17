@@ -16,6 +16,48 @@ output: index.html
 
 *navigate with left, right keys*
 
+--
+### js obstacles
+
+> Functions are first class citizens
+
+```js
+function test () {};
+typeof test === 'function';
+typeof test.prototype === 'object';
+
+test.one = 1; // functions can have properties
+console.log(test.one); // -> 1
+```
+
+--
+### js obstacles
+
+> Object properties can be named almost everything
+
+*but you can only access them with strings in square brackets*
+
+```js
+var obj = {};
+obj.a = 'A';
+console.log(obj.a) // -> 'A'
+
+// same as
+obj['a'] = 'A';
+console.log(obj['a']) // -> 'A'
+
+// names that DON'T work with dot notation 
+obj.1 = 1; // Uncaught SyntaxError: Unexpected number
+obj.a-b = 'ab'; // Uncaught ReferenceError: b is not defined
+obj.@#!? = 'wat?'; // SyntaxError: Invalid or unexpected token
+obj.┬──┬ ノ( ゜-゜ノ) = 'mood'; // SyntaxError: Invalid or unexpected token
+
+// but work as strings in square brackets
+obj['1'] = 1;
+obj['a-b'] = 'ab';
+obj['@#!?'] = 'wat?';
+obj['┬──┬ ノ( ゜-゜ノ)'] = 'mood';
+```
 
 --
 ### js obstacles
@@ -122,7 +164,6 @@ Hello.prototype.world = function () {
     }, 1000);
 };
 Hello('I SAY:').world();
-
 ```
 
 --
@@ -131,7 +172,6 @@ Hello('I SAY:').world();
 > Grasp Functional Beauty
 
 ```js
-
 function repeater (who, what) {
   var text = 'said';
   // returning the inner function creates a closure at run time
@@ -147,7 +187,6 @@ i();  // I said hello
 you(); // you said world
 
 repeater('everyone', 'yay!')();  //everyone said yay!
-
 ```
 
 --
@@ -156,7 +195,6 @@ repeater('everyone', 'yay!')();  //everyone said yay!
 > problem with `for` loop
 
 ```js
-
 // works as expected
 for(var i = 0; i < 10; i++) {
   console.log('i', i);
@@ -186,7 +224,7 @@ arr.forEach(function(i){
   //0 1 2  ... 9
 });  // **Array.forEach works well for asynchronous actions**
 
-// anonymous immediately invoked function
+// anonymous immediately invoked function expression (IIFE)
 for(var i = 0; i < 10; i++) {
   (function(i){
     setTimeout(function (){console.log('i', i)}, 100);
@@ -223,7 +261,9 @@ function myfunction () {
 
 > Function Hoisting
 
-*Function definitions are also hoisted, Function declarations `var myfunc = function(){}` are NOT hoisted.*
+*Function definitions are also hoisted* 
+
+*Function declarations are NOT hoisted: `var myfunc = function(){}`*
 
 ```js
 hoisted(); // works
@@ -291,6 +331,9 @@ console.log(x); // 'hallo'
 
 console.log(x); // 'hallo'
 ```
+
+*with immediately invoked function expression (IIFE)*
+
 --
 ### js obstacles
 
@@ -308,7 +351,6 @@ console.log(x); // 'hallo'
 (function ($) {
   console.log($('body'));
 }(jQuery));
-
 ```
 
 --
@@ -330,12 +372,12 @@ function repeater(who, what) {
 repeat('I', ', hey YOU!');
 ```
 
-**JavaScript does not support dynamic scope, where the variable resolution happens in the scope where the function is called at run time.**
+**JavaScript does NOT support dynamic scope, where the variable resolution happens in the scope where the function is called at run time.**
 
 --
 ### js obstacles
 
-> Lexical Scope
+> BUT Lexical Scope
 
 ```js
 function whoSaysWhat (who, what) {
@@ -380,6 +422,7 @@ repeater('everyone', 'yay!')();  //everyone said yay!
 - ES5 :: **node.js** <= 0.x :: [**browser** caniuse +](http://caniuse.com/#search=es5)
 - ES6 (ECMAScript 2015) :: **io.js, node.js** > 0.x :: [**browser** caniuse ~](http://caniuse.com/#search=es6)
 
+*Transpilers might be helpful in using the next version of JavaScript even it is not fully supported by the engine (browser or node.js) by transpiling it into the currently supported version, but they also come at a cost and add another complexity.*
 
 --
 ### js obstacles
@@ -388,42 +431,44 @@ repeater('everyone', 'yay!')();  //everyone said yay!
 > - Many tools/frameworks to pick from
 > - **It's hard to choose the *right* Tool** for the job
 
+*one can easily forget the original problem that needed to be solved by adding new fancy stuff and solving problems that were not there in the first place*
+
 --
 ### js obstacles with ES6
 
 > Variable Hoisting
 
-*`let` variables are **NOT** hoisted*
+*`let` and `const` variables are not hoisted*
 
 ```js
-let foo = 'bar';
-foo = 'milkbar'; // perfectly fine
-
-bar = 'milkbar'; // error: not defined
-typeof bar // IMPORTANT: typeof undefined `let` throws an error too!
-let bar = '';
-```
---
-### js obstacles with ES6
-
-> Variable Hoisting
-
-*`const` and `let` variables are not hoisted*
-
-```js
-function c () {
-  typeof foo; // ReferenceError: foo is not defined
-  const foo = 'bar';
-}
-c();
-
 function l () {
   typeof foo; // ReferenceError: foo is not defined
   let foo = 'bar';
 }
 l();
 
+function c () {
+  typeof foo; // ReferenceError: foo is not defined
+  const foo = 'bar';
+}
+c();
+
 typeof foo; // 'undefined'
+```
+
+--
+### js obstacles with ES6
+
+> Variable Hoisting
+
+*checking with **typeof** is NOT SAFE anymore!*
+
+```js
+typeof undefinedVariable // safe: -> 'undefined'
+
+bar = 'milkbar'; // error: not defined
+typeof bar // IMPORTANT: typeof is not safe anymore and throws an error!
+let bar = ''; // because of this line (same for `let` and `const`)
 ```
 
 --
@@ -454,7 +499,9 @@ myfunction();
 
 > Variable Scope
 
-*`let` and `const` are not accessable outside of the block they were defined in*
+*`let` and `const` are not accessible outside of the block they were defined in*
+
+*but variables declared with `var` are accessible outside of the defining block*
 
 ```js
 for (let i = 0; i < 3; i++) {
@@ -483,6 +530,7 @@ for(var i = 0; i < 10; i++) {
 } // **don't use for loop for asynchronous actions**
 ```
 you can now easily fix this with `let` with ES6
+
 ```js
 // you can fix this with `let`
 for(let i = 0; i < 10; i++) {
@@ -509,7 +557,7 @@ document.body.addEventListener('click', function() {
 ```
 
 ```js
-document.body.addEventListener('click', (e) => {
+document.body.addEventListener('click', () => {
   console.log(this instanceof HTMLBodyElement); // false -> window object
 });
 ```
