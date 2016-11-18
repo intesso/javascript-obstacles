@@ -404,54 +404,63 @@ img {
   width: auto;
 }
 
-body,
-.slide {
+body, .slide {
   background-color: #eee;
 }
 
 .slide-content {
   margin-top: 20px;
   width: auto;
-  max-width: 1000px;
+  max-width: 900px;
   height: auto;
   overflow: auto;
   z-index: 1;
 }
 
-.controls {
+.arrow {
   position: fixed;
-  bottom: 20px;
-  left: 20px;
+  bottom: 70px;
+  margin: 0;
+  padding: 0;
+  border: none;
+  opacity: 0.3;
+  transform: scale(0.8);
 }
 
-.arrow {
-  width: 0;
-  height: 0;
-  border: 30px solid #ddd;
-  float: left;
-  margin-right: 30px;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+@media (max-width: 850px) {
+  .arrow {
+    opacity: 0.2;
+    bottom: 60px;
+    transform: scale(0.7);
+  }
+}
+
+@media (max-width: 480px) {
+  .arrow {
+    opacity: 0.1;
+    bottom: 52px;
+    transform: scale(0.56);
+  }
 }
 
 .prev {
-  border-top-color: transparent;
-  border-bottom-color: transparent;
-  border-left-color: transparent;
-  border-left-width: 0;
-  border-right-width: 50px;
+  left: 0;
+  border: none;
+}
+
+.prev:before {
+  float: left;
+  content: url(img/left.png);
 }
 
 .next {
-  border-top-color: transparent;
-  border-bottom-color: transparent;
-  border-right-color: transparent;
-  border-left-width: 50px;
-  border-right-width: 0;
+  right: 0;
+  border: none;
+}
+
+.next:before {
+  float: right;
+  content: url(img/right.png);
 }
   </style>
 </head>
