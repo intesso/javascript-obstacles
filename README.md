@@ -603,6 +603,7 @@ function Greeter(greeter) {
 }
 Greeter('Tom').greet('Jerry'); // -> Tom greets Jerry
 ```
+
 --
 ### js obstacles with ES6
 
@@ -625,3 +626,68 @@ new Greeter('Tom').greet('Jerry'); // -> Tom greets Jerry
 Greeter('Tom').greet('Jerry'); // TypeError: 
 // Class constructor Greeter cannot be invoked without 'new'
 ```
+
+--
+### js obstacles with ES6
+
+> Promise Error Handling
+
+```js
+var p = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve('waited');
+    reject(new Error()); 
+    // Promise is already resolved, -> no Error
+  }, 100);
+});
+
+p .then(console.log) // -> waited
+  .catch((err) => console.error(`ERROR: ${err}`)) 
+  // not being called
+```
+
+> NICE! no Error is thrown after the Promise resolved
+
+--
+### js obstacles with ES6
+
+> Promise Error Handling
+
+```js
+var p = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve('waited'); // resolves
+    setTimeout(() => { throw new Error('uups') }, 100); 
+    // Erorr is thrown after resolved, without being catched
+  }, 100);
+});
+
+p .then(console.log) // -> waited
+  .catch((err) => console.error(`ERROR: ${err}`)) 
+  // not being catched
+```
+
+> UUPS! With Promises, Errors can still be thrown without being able to catch them!
+
+--
+### js obstacles with ES6
+
+> Promise Error Handling
+
+```js
+var p = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve('waited'); // resolves
+  }, 100);
+});
+
+p .then((val) => val, (err) => err) // -> forward to next handler
+  .then((val) => {
+    throw new Error(val)
+  }, (err) => {
+    console.error(`FIRST_ERROR: ${err}`) // not being called
+  })
+  .catch((err) => console.error(`ERROR: ${err}`)) // -> ERROR
+```
+
+> If an error is thrown in then's first function, it is not being catched by the same then's second error handler function.

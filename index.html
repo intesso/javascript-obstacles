@@ -1033,7 +1033,72 @@ Greeter(<span class="hljs-string">'Tom'</span>).greet(<span class="hljs-string">
 <span class="hljs-comment">// Class constructor Greeter cannot be invoked without 'new'</span></code></pre>
 </section>
   </div>
-  <div class="slide hidden author-slide" id="slide-31">
+  <div class="slide hidden" id="slide-31">
+    <section class="slide-content"><h3 id="js-obstacles-with-es6">js obstacles with ES6</h3>
+<blockquote>
+<p>Promise Error Handling</p>
+</blockquote>
+<pre><code class="lang-js"><span class="hljs-keyword">var</span> p = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>((resolve, reject) =&gt; {
+  setTimeout(() =&gt; {
+    resolve(<span class="hljs-string">'waited'</span>);
+    reject(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>()); 
+    <span class="hljs-comment">// Promise is already resolved, -&gt; no Error</span>
+  }, <span class="hljs-number">100</span>);
+});
+
+p .then(<span class="hljs-built_in">console</span>.log) <span class="hljs-comment">// -&gt; waited</span>
+  .catch((err) =&gt; <span class="hljs-built_in">console</span>.error(<span class="hljs-string">`ERROR: <span class="hljs-subst">${err}</span>`</span>)) 
+  <span class="hljs-comment">// not being called</span></code></pre>
+<blockquote>
+<p>NICE! no Error is thrown after the Promise resolved</p>
+</blockquote>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-32">
+    <section class="slide-content"><h3 id="js-obstacles-with-es6">js obstacles with ES6</h3>
+<blockquote>
+<p>Promise Error Handling</p>
+</blockquote>
+<pre><code class="lang-js"><span class="hljs-keyword">var</span> p = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>((resolve, reject) =&gt; {
+  setTimeout(() =&gt; {
+    resolve(<span class="hljs-string">'waited'</span>); <span class="hljs-comment">// resolves</span>
+    setTimeout(() =&gt; { <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">'uups'</span>) }, <span class="hljs-number">100</span>); 
+    <span class="hljs-comment">// Erorr is thrown after resolved, without being catched</span>
+  }, <span class="hljs-number">100</span>);
+});
+
+p .then(<span class="hljs-built_in">console</span>.log) <span class="hljs-comment">// -&gt; waited</span>
+  .catch((err) =&gt; <span class="hljs-built_in">console</span>.error(<span class="hljs-string">`ERROR: <span class="hljs-subst">${err}</span>`</span>)) 
+  <span class="hljs-comment">// not being catched</span></code></pre>
+<blockquote>
+<p>UUPS! With Promises, Errors can still be thrown without being able to catch them!</p>
+</blockquote>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-33">
+    <section class="slide-content"><h3 id="js-obstacles-with-es6">js obstacles with ES6</h3>
+<blockquote>
+<p>Promise Error Handling</p>
+</blockquote>
+<pre><code class="lang-js"><span class="hljs-keyword">var</span> p = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>((resolve, reject) =&gt; {
+  setTimeout(() =&gt; {
+    resolve(<span class="hljs-string">'waited'</span>); <span class="hljs-comment">// resolves</span>
+  }, <span class="hljs-number">100</span>);
+});
+
+p .then((val) =&gt; val, (err) =&gt; err) <span class="hljs-comment">// -&gt; forward to next handler</span>
+  .then((val) =&gt; {
+    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(val)
+  }, (err) =&gt; {
+    <span class="hljs-built_in">console</span>.error(<span class="hljs-string">`FIRST_ERROR: <span class="hljs-subst">${err}</span>`</span>) <span class="hljs-comment">// not being called</span>
+  })
+  .catch((err) =&gt; <span class="hljs-built_in">console</span>.error(<span class="hljs-string">`ERROR: <span class="hljs-subst">${err}</span>`</span>)) <span class="hljs-comment">// -&gt; ERROR</span></code></pre>
+<blockquote>
+<p>If an error is thrown in then&#39;s first function, it is not being catched by the same then&#39;s second error handler function.</p>
+</blockquote>
+</section>
+  </div>
+  <div class="slide hidden author-slide" id="slide-34">
     <section class="slide-content"><div class="author">
   <h1 class="name">Andi Neck</h1>
     <h3 class="twitter">
