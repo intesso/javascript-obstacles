@@ -113,6 +113,55 @@ add(1, function(i){
 --
 ### js obstacles
 
+> Functions are first class citizens
+
+```js
+function test () {};
+typeof test === 'function';
+typeof test.prototype === 'object';
+
+test.one = 1; // functions can have properties
+console.log(test.one); // -> 1
+```
+
+--
+### js obstacles
+
+> **Statements** are actions
+
+- are **NOT allowed** in ES6 Template Strings
+
+examples: 
+```js
+if {}
+else {}
+for () {}
+do {} while ()
+while {}
+```
+
+--
+### js obstacles
+
+> **Expressions** produce a value, can be assigned to a var
+
+- are **allowed** in ES6 Template Strings
+- are allowed where ever a statement is allowed
+
+examples:
+```js
+a
+a ? 1 ? 0
+a = 2
+{ a : 3}
+[ 1, 2, 3 ]
+function a () {}
+a = function () {}
+```
+
+--
+### js obstacles
+
 > Prototypal Inheritance
 
 ```js
